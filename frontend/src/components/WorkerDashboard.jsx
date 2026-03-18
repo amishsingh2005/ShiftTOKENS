@@ -9,8 +9,10 @@ const WorkerDashboard = () => {
     const [activeTokens, setActiveTokens] = useState([]);
     const [isTokenizing, setIsTokenizing] = useState(false);
 
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
     const fetchActiveTokens = () => {
-        fetch('http://localhost:5000/api/tokens/active')
+        fetch(`${API_BASE}/api/tokens/active`)
             .then(res => res.json())
             .then(data => setActiveTokens(data))
             .catch(err => console.error(err));
@@ -25,7 +27,7 @@ const WorkerDashboard = () => {
         setStatus('Initiating Secure Smart Contract...');
         
         try {
-            const res = await fetch('http://localhost:5000/api/tokens/create', {
+            const res = await fetch(`${API_BASE}/api/tokens/create`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

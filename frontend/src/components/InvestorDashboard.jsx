@@ -8,8 +8,10 @@ const InvestorDashboard = () => {
     const [stats, setStats] = useState({ totalVolume: 124500, activeAPY: 8.7, tvl: 4500000 });
     const [isLoading, setIsLoading] = useState(true);
 
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
     useEffect(() => {
-        fetch('http://localhost:5000/api/tokens/active')
+        fetch(`${API_BASE}/api/tokens/active`)
             .then(res => res.json())
             .then(data => {
                 setTokens(data);
